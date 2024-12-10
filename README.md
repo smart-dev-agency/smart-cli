@@ -19,7 +19,7 @@ Once the CLI is installed globally, you can run it with `smart-cli` to get a mai
 
 ## Screenshots
 
-![App Screenshot](https://user-images.githubusercontent.com/57076657/217601289-cf59acc8-8cf2-445d-81d4-95646e683a50.png)
+![App Screenshot](https://github.com/user-attachments/assets/4757367a-e5f5-49a4-8a1e-82d8fd1eaaa4)
 
 ## Authors
 
