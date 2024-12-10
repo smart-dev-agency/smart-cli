@@ -10,7 +10,7 @@ Set of development tools for the command line.
 ## Installation
 
 ```bash
-npm i @smart-dev-agency/smart-cli
+npm i -g @smart-dev-agency/smart-cli
 ```
     
 ## Usage
