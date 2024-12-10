@@ -1,5 +1,5 @@
 {
-  "name": "smart-cli",
+  "name": "@smart-dev-agency/smart-cli",
   "version": "1.0.0",
   "description": "Set of development tools for the command line.",
   "main": "index.js",
