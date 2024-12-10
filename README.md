@@ -1,4 +1,4 @@
-
+[![Node.js Package](https://github.com/smart-dev-agency/smart-cli/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/smart-dev-agency/smart-cli/actions/workflows/npm-publish.yml)
 # Smart CLI Tools for developers
 
 Set of development tools for the command line.
