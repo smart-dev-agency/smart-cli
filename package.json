@@ -1,6 +1,13 @@
 {
   "name": "@smart-dev-agency/smart-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smart-dev-agency/smart-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smart-dev-agency/smart-cli/issues"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -10,6 +17,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "cli",
+    "tool",
+    "developers",
+    "automation"
+  ],
   "author": "Smart Dev Agency",
   "license": "AGPL",
   "bin": {
