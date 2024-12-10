@@ -1,6 +1,10 @@
 {
   "name": "@smart-dev-agency/smart-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "description": "Set of development tools for the command line.",
   "main": "index.js",
   "scripts": {
