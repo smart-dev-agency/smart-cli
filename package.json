@@ -1,6 +1,6 @@
 {
   "name": "@smart-dev-agency/smart-cli",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/smart-dev-agency/smart-cli.git"
@@ -33,6 +33,7 @@
     "chalk": "^5.3.0",
     "clear": "^0.1.0",
     "commander": "^12.1.0",
+    "conf": "^13.1.0",
     "figlet": "^1.8.0",
     "fs-extra": "^11.2.0",
     "inquirer": "^9.3.7"

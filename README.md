@@ -1,10 +1,11 @@
 [![Node.js Package](https://github.com/smart-dev-agency/smart-cli/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/smart-dev-agency/smart-cli/actions/workflows/npm-publish.yml)
+
 # Smart CLI Tools for developers
 
 Set of development tools for the command line.
 
-
 ## Requirements
+
 - node js 16+
 
 ## Installation
@@ -12,10 +13,33 @@ Set of development tools for the command line.
 ```bash
 npm i -g @smart-dev-agency/smart-cli
 ```
-    
+
 ## Usage
 
 Once the CLI is installed globally, you can run it with `smart-cli` to get a main view of the application.
+
+## Change Configuration
+
+You can use the update_config command to update some CLI configuration. This is the JSON structure to update config:
+
+```json
+{
+  "cli_name": "New Name CLI",
+  "commits_prefix": {
+    "feat": "✨", // string or emoji data
+    "fix": "🚑️",
+    "chore": "📝",
+    "docs": "📝",
+    "test": "🧪",
+    "style": "💄",
+    "refactor": "♻️",
+    "perf": "⚡️",
+    "build": "👷",
+    "ci": "🏗️",
+    "revert": "⏪️"
+  }
+}
+```
 
 ## Screenshots
 

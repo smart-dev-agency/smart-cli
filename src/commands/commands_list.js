@@ -1,6 +1,6 @@
+import chalk from "chalk";
 import clear from "clear";
 import header from "../components/header.js";
-import chalk from "chalk";
 import availableCommands from "../helpers/available_commands.js";
 
 export default function commandList() {
@@ -13,7 +13,7 @@ export default function commandList() {
   );
   availableCommands.forEach((command) =>
     console.log(
-      chalk.green(`${command.name}:`) + chalk.white(` ${command.description}`)
+      chalk.greenBright(`${command.name}:`) + chalk.white(` ${command.description}`)
     )
   );
 }

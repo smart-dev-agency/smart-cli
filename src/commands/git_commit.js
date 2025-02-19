@@ -1,10 +1,10 @@
-import header from "../components/header.js";
-import commit_types from "../helpers/commit_types.js";
-import inquirer from "inquirer";
-import clear from "clear";
 import chalk from "chalk";
-import executionCommand from "../helpers/execution_command.js";
+import clear from "clear";
+import inquirer from "inquirer";
+import header from "../components/header.js";
 import commitsTypes from "../helpers/commit_types.js";
+import config from "../helpers/config.js";
+import executionCommand from "../helpers/execution_command.js";
 
 export default function commit() {
   let commitChoices = [];
@@ -20,9 +20,7 @@ export default function commit() {
   clear();
   header();
   console.log(
-    chalk.greenBright(
-      "Vas a crear un commit con los cambios actuales, por favor selecciona que tipo de commit vas a realizar antes de iniciar\n"
-    )
+    chalk.greenBright("Vas a crear un commit con los cambios actuales, por favor selecciona que tipo de commit vas a realizar antes de iniciar\n")
   );
 
   let message = "";
@@ -41,7 +39,7 @@ export default function commit() {
         name: "commit_component",
         message: "Escribe el nombre del componente:",
         validate: async (input) => {
-          if (input.length > 4 && input.length < 21) {
+          if (input.length > 2 && input.length < 100) {
             return true;
           } else {
             return "El nombre del componente debe contener entre 5 y 20 caracteres";
@@ -55,7 +53,7 @@ export default function commit() {
         name: "commit_title",
         message: "Escribe el titulo del commit:",
         validate: async (input) => {
-          if (input.length > 4 && input.length < 41) {
+          if (input.length > 2 && input.length < 100) {
             return true;
           } else {
             return "La descripción del commit debe contener entre 5 y 41 caracteres";
@@ -67,22 +65,31 @@ export default function commit() {
         message: "Escribe la descripción del commit:",
       },
       {
+        type: "confirm",
+        name: "breaking_change",
+        message: "¿Es un breaking change?",
+        default: false,
+      },
+      {
         type: "list",
         name: "commit_confirm",
-        message: "Estas seguro de crear el commit ?",
+        message: "¿Estás seguro de crear el commit?",
         choices: ["Si", "No"],
       },
     ])
     .then((answers) => {
-      message = `${answers.commit_type}(${answers.commit_component}): ${answers.commit_title}`;
+      const prefix = config.get("commits_prefix")[answers.commit_type];
+      message = `${prefix} ${answers.commit_type}(${answers.commit_component}): ${answers.commit_title}`;
       description = answers.commit_description;
 
-      if (answers.commit_confirm == "No") {
+      if (answers.breaking_change) {
+        description = "BREAKING CHANGE: " + description;
+      }
+
+      if (answers.commit_confirm === "No") {
         return;
       }
 
-      executionCommand(
-        `git add -A && git commit -a -m "${message}" -m "${description}"`
-      );
+      executionCommand(`git add -A && git commit -a -m "${message}" -m "${description}"`);
     });
 }

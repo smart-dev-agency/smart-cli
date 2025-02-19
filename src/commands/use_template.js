@@ -1,11 +1,10 @@
-import fs from "fs-extra";
-import header from "../components/header.js";
-import inquirer from "inquirer";
-import clear from "clear";
 import chalk from "chalk";
-import executionCommand from "../helpers/execution_command.js";
-import getAppDirectory from "../helpers/get_app_directory.js";
+import clear from "clear";
+import fs from "fs-extra";
+import inquirer from "inquirer";
+import header from "../components/header.js";
 import availableTemplates from "../helpers/available_templates.js";
+import getAppDirectory from "../helpers/get_app_directory.js";
 
 const currentDirectory = `${process.cwd()}/`;
 
@@ -75,7 +74,7 @@ export default async function useTemplate() {
         });
         console.log(chalk.greenBright("Componente creado con éxito"));
       } catch (err) {
-        console.log(chalk.redBright(error));
+        console.log(chalk.redBright(err));
       }
     });
 }

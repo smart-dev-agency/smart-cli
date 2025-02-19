@@ -1,0 +1,16 @@
+{
+  "cli_name": "New Name CLI",
+  "commits_prefix": {
+    "feat": "✨",
+    "fix": "🚑️",
+    "chore": "📝",
+    "docs": "📝",
+    "test": "🧪",
+    "style": "💄",
+    "refactor": "♻️",
+    "perf": "⚡️",
+    "build": "👷",
+    "ci": "🏗️",
+    "revert": "⏪️"
+  }
+}
