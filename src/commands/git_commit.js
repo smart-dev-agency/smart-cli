@@ -72,6 +72,15 @@ export default function commit() {
       },
       {
         type: "list",
+        name: "includeChanges",
+        message: "¿Quieres incluir solo los cambios staged o todos los cambios?",
+        choices: [
+          { name: "Solo staged", value: "staged" },
+          { name: "Todos (incluye unstaged)", value: "all" },
+        ],
+      },
+      {
+        type: "list",
         name: "commit_confirm",
         message: "¿Estás seguro de crear el commit?",
         choices: ["Si", "No"],
@@ -90,6 +99,10 @@ export default function commit() {
         return;
       }
 
-      executionCommand(`git add -A && git commit -a -m "${message}" -m "${description}"`);
+      if (answers.includeChanges === "all") {
+        executionCommand(`git add -A && git commit -a -m "${message}" -m "${description}"`);
+      } else {
+        executionCommand(`git commit -m "${message}" -m "${description}"`);
+      }
     });
 }
