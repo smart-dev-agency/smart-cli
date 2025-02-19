@@ -92,7 +92,7 @@ export default function commit() {
       description = answers.commit_description;
 
       if (answers.breaking_change) {
-        description = "BREAKING CHANGE: " + description;
+        description = "💥 BREAKING CHANGE: \n" + description;
       }
 
       if (answers.commit_confirm === "No") {
