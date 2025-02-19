@@ -1,0 +1,40 @@
+name: Create Tag on Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag_on_merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Necesario para tener acceso a todos los tags
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine new tag version
+        id: new_tag
+        run: |
+          # Obtener el último tag, o usar "v0.0.0" si no hay ninguno
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Último tag: $LAST_TAG"
+          # Extraer la parte numérica (asumiendo formato vMAJOR.MINOR.PATCH)
+          version=${LAST_TAG#v}
+          IFS='.' read -r major minor patch <<< "$version"
+          # Incrementar la versión patch (puedes ajustar la lógica según tus necesidades)
+          new_patch=$((patch + 1))
+          NEW_TAG="v${major}.${minor}.${new_patch}"
+          echo "Nuevo tag: $NEW_TAG"
+          echo "::set-output name=tag::$NEW_TAG"
+
+      - name: Create and push new tag
+        run: |
+          git tag ${{ steps.new_tag.outputs.tag }}
+          git push origin ${{ steps.new_tag.outputs.tag }}
