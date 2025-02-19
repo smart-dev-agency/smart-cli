@@ -1,0 +1,41 @@
+name: Create Tag on Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag_on_merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Necesario para tener acceso a todo el historial y tags
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine tag version from package.json
+        id: new_tag
+        run: |
+          # Leer la versión desde package.json
+          VERSION=$(node -p "require('./package.json').version")
+          NEW_TAG="v$VERSION"
+          echo "Nueva versión del tag: $NEW_TAG"
+
+          # Verificar si el tag ya existe
+          if git rev-parse "$NEW_TAG" >/dev/null 2>&1; then
+            echo "El tag $NEW_TAG ya existe. Saliendo con error."
+            exit 1
+          else
+            echo "::set-output name=tag::$NEW_TAG"
+          fi
+
+      - name: Create and push new tag
+        run: |
+          git tag ${{ steps.new_tag.outputs.tag }}
+          git push origin ${{ steps.new_tag.outputs.tag }}
