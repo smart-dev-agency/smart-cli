@@ -86,13 +86,14 @@ export default function commit() {
         choices: ["Si", "No"],
       },
     ])
-    .then((answers) => {
+    .then(async (answers) => {
       const prefix = config.get("commits_prefix")[answers.commit_type];
-      message = `${prefix} ${answers.commit_type}(${answers.commit_component}): ${answers.commit_title}`;
       description = answers.commit_description;
+      message = `${prefix} ${answers.commit_type}(${answers.commit_component}): ${answers.commit_title}`;
 
       if (answers.breaking_change) {
-        description = "💥 BREAKING CHANGE: \n" + description;
+        description = `💥 BREAKING CHANGE:\n ${description}`;
+        message = `${prefix} ${answers.commit_type}(${answers.commit_component}) ! : ${answers.commit_title}`;
       }
 
       if (answers.commit_confirm === "No") {
@@ -102,7 +103,14 @@ export default function commit() {
       if (answers.includeChanges === "all") {
         executionCommand(`git add -A && git commit -a -m "${message}" -m "${description}"`);
       } else {
-        executionCommand(`git commit -m "${message}" -m "${description}"`);
+        const diff = await executionCommand(`git diff --staged`, true, false, false);
+        if (diff === "" || diff === null) {
+          console.log(chalk.redBright("No hay cambios staged para realizar el commit"));
+          return;
+        } else {
+          executionCommand(`git commit -m "${message}" -m "${description}"`, true, false, false);
+          console.log(chalk.greenBright("Commit realizado con éxito"));
+        }
       }
     });
 }

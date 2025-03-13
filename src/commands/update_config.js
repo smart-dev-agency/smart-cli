@@ -88,6 +88,7 @@ export default async function updateConfig() {
             feat: "",
             fix: "",
             chore: "",
+            release: "",
             docs: "",
             test: "",
             style: "",
@@ -137,7 +138,7 @@ function validateConfig(configObj) {
   if (typeof configObj.cli_name !== "string") return false;
   if (typeof configObj.commits_prefix !== "object" || configObj.commits_prefix === null) return false;
 
-  const keys = ["feat", "fix", "chore", "docs", "test", "style", "refactor", "perf", "build", "ci", "revert"];
+  const keys = ["feat", "fix", "chore", "release", "docs", "test", "style", "refactor", "perf", "build", "ci", "revert"];
 
   for (const key of keys) {
     if (!(key in configObj.commits_prefix)) return false;
