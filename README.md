@@ -29,6 +29,7 @@ You can use the update_config command to update some CLI configuration. This is 
     "feat": "✨", // string or emoji data
     "fix": "🚑️",
     "chore": "📝",
+    "release": "🚀",
     "docs": "📝",
     "test": "🧪",
     "style": "💄",
