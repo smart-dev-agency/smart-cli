@@ -1,19 +1,25 @@
-import { exec } from "child_process";
 import chalk from "chalk";
+import { exec } from "child_process";
 
-export default function executionCommand(command) {
+export default function executionCommand(command, showError = true, showStderr = true, showStdout = true) {
   return new Promise(function (resolve, reject) {
     exec(command, (error, stdout, stderr) => {
       if (error) {
-        console.log(chalk.redBright(`error: ${error}`));
+        if (showError) {
+          console.log(chalk.redBright(`error: ${error}`));
+        }
         reject(error);
       } else if (stderr) {
-        console.log(chalk.blueBright(stderr));
+        if (showStderr) {
+          console.log(chalk.blueBright(stderr));
+        }
         resolve(stderr);
       } else {
-        console.log(chalk.greenBright(stdout));
+        if (showStdout) {
+          console.log(chalk.greenBright(stdout));
+        }
         resolve(stdout);
       }
-    }).stdout.pipe(process.stdout);
+    });
   });
 }
