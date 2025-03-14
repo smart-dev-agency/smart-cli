@@ -102,14 +102,15 @@ export default function commit() {
 
       if (answers.includeChanges === "all") {
         executionCommand(`git add -A && git commit -a -m "${message}" -m "${description}"`);
+        console.log(chalk.greenBright("\n Commit realizado con éxito \n "));
       } else {
         const diff = await executionCommand(`git diff --staged`, true, false, false);
         if (diff === "" || diff === null) {
-          console.log(chalk.redBright("No hay cambios staged para realizar el commit"));
+          console.log(chalk.redBright("\n No hay cambios staged para realizar el commit \n "));
           return;
         } else {
           executionCommand(`git commit -m "${message}" -m "${description}"`, true, false, false);
-          console.log(chalk.greenBright("Commit realizado con éxito"));
+          console.log(chalk.greenBright("\n Commit realizado con éxito \n "));
         }
       }
     });

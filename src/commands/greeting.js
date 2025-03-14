@@ -3,7 +3,6 @@ import clear from "clear";
 import inquirer from "inquirer";
 import header from "../components/header.js";
 import availableCommands from "../helpers/available_commands.js";
-import checkUpdate from "../helpers/check_update.js";
 import commandList from "./commands_list.js";
 import commit from "./git_commit.js";
 import newBranch from "./new_branch.js";
@@ -14,7 +13,7 @@ async function greeting() {
   clear();
   header();
   console.log(chalk.greenBright("Herramientas CLI Smart Dev \n"));
-  await checkUpdate();
+  // await checkUpdate();
 
   let commandChoices = [];
   for (const command of availableCommands) {

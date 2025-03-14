@@ -20,6 +20,6 @@ export default function executionCommand(command, showError = true, showStderr =
         }
         resolve(stdout);
       }
-    }).stdout.pipe(process.stdout);
+    });
   });
 }
